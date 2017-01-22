@@ -1,3 +1,7 @@
+-- Wooden_Bucket init.lua
+-- Copyright Duane Robertson (duane@duanerobertson.com), 2017
+-- Distributed under the LGPLv2.1 (https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
+
 
 local function register_liquid_wood(source, itemname, inventory_image, name, groups)
 	if not (source and itemname and inventory_image and name and type(source) == 'string' and type(itemname) == 'string' and type(inventory_image) == 'string') then
