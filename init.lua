@@ -80,14 +80,27 @@ for fluid, def in pairs(bucket.liquids) do
 	end
 end
 
+if minetest.get_modpath("thirsty") then
 
-minetest.register_craft({
-	output = 'wooden_bucket:bucket_wood_empty 1',
-	recipe = {
-		{'group:wood', '', 'group:wood'},
-		{'', 'group:wood', ''},
-	}
-})
+	minetest.register_craft({
+		output = 'wooden_bucket:bucket_wood_empty 1',
+		recipe = {
+			{'thirsty:wooden_bowl', '', 'thirsty:wooden_bowl'},
+			{'', 'thirsty:wooden_bowl', ''},
+		}
+	})
+
+else
+
+	minetest.register_craft({
+		output = 'wooden_bucket:bucket_wood_empty 1',
+		recipe = {
+			{'group:wood', '', 'group:wood'},
+			{'', 'group:wood', ''},
+		}
+	})
+
+end
 
 minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
 	description = "Empty Wooden Bucket",
