@@ -1,5 +1,5 @@
 -- Wooden_Bucket init.lua
--- Copyright Duane Robertson (duane@duanerobertson.com), 2017
+-- Copyright Duane Robertson (duane@duanerobertson.com), 2017, 2019
 -- Distributed under the LGPLv2.1 (https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html)
 
 
