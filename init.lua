@@ -95,7 +95,7 @@ else
 	minetest.register_craft({
 		output = 'wooden_bucket:bucket_wood_empty 1',
 		recipe = {
-			{'group:wood', '', 'group:wood'},
+			{'group:wood', 'group:leaves', 'group:wood'},
 			{'', 'group:wood', ''},
 		}
 	})
