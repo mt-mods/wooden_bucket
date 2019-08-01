@@ -81,7 +81,6 @@ for fluid, def in pairs(bucket.liquids) do
 end
 
 if minetest.get_modpath("thirsty") then
-
 	minetest.register_craft({
 		output = 'wooden_bucket:bucket_wood_empty 1',
 		recipe = {
@@ -89,17 +88,30 @@ if minetest.get_modpath("thirsty") then
 			{'', 'thirsty:wooden_bowl', ''},
 		}
 	})
-
 else
-
-	minetest.register_craft({
-		output = 'wooden_bucket:bucket_wood_empty 1',
-		recipe = {
-			{'group:wood', 'group:leaves', 'group:wood'},
-			{'', 'group:wood', ''},
-		}
+	local res = minetest.get_craft_result({
+		method = 'normal',
+		width = 3,
+		items = {'group:wood', '', 'group:wood','', 'group:wood', '','', '', ''},
 	})
 
+	if res and type(res.item) == 'string' then
+		minetest.register_craft({
+			output = 'wooden_bucket:bucket_wood_empty 1',
+			recipe = {
+				{'group:wood', 'group:leaves', 'group:wood'},
+				{'', 'group:wood', ''},
+			}
+		})
+	else
+		minetest.register_craft({
+			output = 'wooden_bucket:bucket_wood_empty 1',
+			recipe = {
+				{'group:wood', '', 'group:wood'},
+				{'', 'group:wood', ''},
+			}
+		})
+	end
 end
 
 minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
