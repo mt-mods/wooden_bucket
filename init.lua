@@ -4,7 +4,8 @@
 
 
 local function register_liquid_wood(source, itemname, inventory_image, name, groups)
-	if not (source and itemname and inventory_image and name and type(source) == 'string' and type(itemname) == 'string' and type(inventory_image) == 'string') then
+	if not (source and itemname and inventory_image and name and type(source) == 'string' and type(itemname) == 'string'
+	and type(inventory_image) == 'string') then
 		return
 	end
 
@@ -45,8 +46,8 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 				-- not buildable to; place the liquid above
 				-- check if the node above can be replaced
 				lpos = pointed_thing.above
-				local node = minetest.get_node_or_nil(lpos)
-				if not node then
+				local nnode = minetest.get_node_or_nil(lpos)
+				if not nnode then
 					return
 				end
 
