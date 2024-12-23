@@ -70,7 +70,8 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 end
 
 for fluid, def in pairs(bucket.liquids) do
-	if not fluid:find('flowing') and not fluid:find('lava') and not fluid:find('molten') and not fluid:find('weightless') then
+	if not fluid:find('flowing') and not fluid:find('lava')
+		and not fluid:find('molten') and not fluid:find('weightless') then
 		local item_name = def.itemname:gsub('[^:]+:bucket', 'wooden_bucket:bucket_wood')
 		local original = minetest.registered_items[def.itemname]
 		if original and item_name and item_name ~= def.itemname then
