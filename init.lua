@@ -36,34 +36,34 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 				return ndef.on_rightclick(pointed_thing.under, node, user, itemstack)
 			end
 
-			local lpos
+			local l_pos
 
 			-- Check if pointing to a buildable node
 			if ndef and ndef.buildable_to then
 				-- buildable; replace the node
-				lpos = pointed_thing.under
+				l_pos = pointed_thing.under
 			else
 				-- not buildable to; place the liquid above
 				-- check if the node above can be replaced
-				lpos = pointed_thing.above
-				local nnode = minetest.get_node_or_nil(lpos)
-				if not nnode then
+				l_pos = pointed_thing.above
+				local l_node = minetest.get_node_or_nil(l_pos)
+				if not l_node then
 					return
 				end
 
-				local above_ndef = minetest.registered_nodes[nnode.name]
+				local l_ndef = minetest.registered_nodes[l_node.name]
 
-				if not above_ndef or not above_ndef.buildable_to then
+				if not l_ndef or not l_ndef.buildable_to then
 					-- do not remove the bucket with the liquid
 					return itemstack
 				end
 			end
 
-			if minetest.is_protected(lpos, user and user:get_player_name() or "") then
+			if minetest.is_protected(l_pos, user and user:get_player_name() or "") then
 				return
 			end
 
-			minetest.set_node(lpos, {name = source})
+			minetest.set_node(l_pos, { name = source })
 			return ItemStack("wooden_bucket:bucket_wood_empty")
 		end
 	})
