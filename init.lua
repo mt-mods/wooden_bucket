@@ -51,7 +51,7 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 					return
 				end
 
-				local above_ndef = nnode and minetest.registered_nodes[nnode.name]
+				local above_ndef = minetest.registered_nodes[nnode.name]
 
 				if not above_ndef or not above_ndef.buildable_to then
 					-- do not remove the bucket with the liquid
