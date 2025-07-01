@@ -1,15 +1,16 @@
 unused_args = false
 allow_defined_top = true
 
-exclude_files = {".luacheckrc"}
+exclude_files = { ".luacheckrc" }
 
 globals = {
-    "minetest", "core",
 }
 
 read_globals = {
-    string = {fields = {"split"}},
-    table = {fields = {"copy", "getn"}},
+    "core",
+
+    string = { fields = { "split" } },
+    table = { fields = { "copy", "getn" } },
 
     --luac
     "math", "table",
@@ -20,3 +21,4 @@ read_globals = {
     --mod produced
     "bucket",
 }
+
