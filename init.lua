@@ -11,7 +11,7 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 		return
 	end
 
-	inventory_image = inventory_image..'^wooden_bucket_overlay.png'
+	inventory_image = inventory_image .. '^wooden_bucket_overlay.png'
 	core.register_craftitem(itemname, {
 		description = name,
 		inventory_image = inventory_image,
@@ -89,31 +89,31 @@ if core.get_modpath("thirsty") then
 	core.register_craft({
 		output = 'wooden_bucket:bucket_wood_empty 1',
 		recipe = {
-			{'thirsty:wooden_bowl', '', 'thirsty:wooden_bowl'},
-			{'', 'thirsty:wooden_bowl', ''},
+			{ 'thirsty:wooden_bowl', '', 'thirsty:wooden_bowl' },
+			{ '', 'thirsty:wooden_bowl', '' },
 		}
 	})
 else
 	local res = core.get_craft_result({
 		method = 'normal',
 		width = 3,
-		items = {'group:wood', '', 'group:wood','', 'group:wood', '','', '', ''},
+		items = { 'group:wood', '', 'group:wood', '', 'group:wood', '', '', '', '' },
 	})
 
 	if res and type(res.item) == 'string' then
 		core.register_craft({
 			output = 'wooden_bucket:bucket_wood_empty 1',
 			recipe = {
-				{'group:wood', 'group:leaves', 'group:wood'},
-				{'', 'group:wood', ''},
+				{ 'group:wood', 'group:leaves', 'group:wood' },
+				{ '', 'group:wood', '' },
 			}
 		})
 	else
 		core.register_craft({
 			output = 'wooden_bucket:bucket_wood_empty 1',
 			recipe = {
-				{'group:wood', '', 'group:wood'},
-				{'', 'group:wood', ''},
+				{ 'group:wood', '', 'group:wood' },
+				{ '', 'group:wood', '' },
 			}
 		})
 	end
@@ -160,7 +160,7 @@ core.register_craftitem("wooden_bucket:bucket_wood_empty", {
 
 			-- if space in inventory add filled bucket, otherwise drop as item
 			local inv = user:get_inventory()
-			if inv:room_for_item("main", {name=giving_back}) then
+			if inv:room_for_item("main", { name = giving_back }) then
 				inv:add_item("main", giving_back)
 			else
 				local pos = user:getpos()
@@ -169,11 +169,11 @@ core.register_craftitem("wooden_bucket:bucket_wood_empty", {
 			end
 
 			-- set to return empty buckets minus 1
-			giving_back = "wooden_bucket:bucket_wood_empty "..tostring(item_count-1)
+			giving_back = "wooden_bucket:bucket_wood_empty " .. tostring(item_count - 1)
 
 		end
 
-		core.add_node(pointed_thing.under, {name="air"})
+		core.add_node(pointed_thing.under, { name = "air" })
 
 		return ItemStack(giving_back)
 	end,

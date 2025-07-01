@@ -1,7 +1,7 @@
 unused_args = false
 allow_defined_top = true
 
-exclude_files = {".luacheckrc"}
+exclude_files = { ".luacheckrc" }
 
 globals = {
 }
@@ -9,8 +9,8 @@ globals = {
 read_globals = {
     "core",
 
-    string = {fields = {"split"}},
-    table = {fields = {"copy", "getn"}},
+    string = { fields = { "split" } },
+    table = { fields = { "copy", "getn" } },
 
     --luac
     "math", "table",
