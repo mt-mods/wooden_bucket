@@ -12,7 +12,7 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 	end
 
 	inventory_image = inventory_image..'^wooden_bucket_overlay.png'
-	minetest.register_craftitem(itemname, {
+	core.register_craftitem(itemname, {
 		description = name,
 		inventory_image = inventory_image,
 		stack_max = 1,
@@ -29,8 +29,8 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 				return
 			end
 
-			local node = minetest.get_node_or_nil(pointed_thing.under)
-			local ndef = node and minetest.registered_nodes[node.name]
+			local node = core.get_node_or_nil(pointed_thing.under)
+			local ndef = node and core.registered_nodes[node.name]
 
 			-- Call on_rightclick if the pointed node defines it
 			if ndef and ndef.on_rightclick and
@@ -48,12 +48,12 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 				-- not buildable to; place the liquid above
 				-- check if the node above can be replaced
 				l_pos = pointed_thing.above
-				local l_node = minetest.get_node_or_nil(l_pos)
+				local l_node = core.get_node_or_nil(l_pos)
 				if not l_node then
 					return
 				end
 
-				local l_ndef = minetest.registered_nodes[l_node.name]
+				local l_ndef = core.registered_nodes[l_node.name]
 
 				if not l_ndef or not l_ndef.buildable_to then
 					-- do not remove the bucket with the liquid
@@ -61,11 +61,11 @@ local function register_liquid_wood(source, itemname, inventory_image, name, gro
 				end
 			end
 
-			if minetest.is_protected(l_pos, user and user:get_player_name() or "") then
+			if core.is_protected(l_pos, user and user:get_player_name() or "") then
 				return
 			end
 
-			minetest.set_node(l_pos, { name = source })
+			core.set_node(l_pos, { name = source })
 			return ItemStack("wooden_bucket:bucket_wood_empty")
 		end
 	})
@@ -76,7 +76,7 @@ for fluid, def in pairs(bucket.liquids) do
 		and not fluid:find('molten') and not fluid:find('weightless')
 	then
 		local item_name = def.itemname:gsub('[^:]+:bucket', 'wooden_bucket:bucket_wood')
-		local original = minetest.registered_items[def.itemname]
+		local original = core.registered_items[def.itemname]
 		if original and item_name and item_name ~= def.itemname then
 			local new_name = original.description:gsub('Bucket', 'Wooden Bucket')
 			local new_image = original.inventory_image
@@ -85,8 +85,8 @@ for fluid, def in pairs(bucket.liquids) do
 	end
 end
 
-if minetest.get_modpath("thirsty") then
-	minetest.register_craft({
+if core.get_modpath("thirsty") then
+	core.register_craft({
 		output = 'wooden_bucket:bucket_wood_empty 1',
 		recipe = {
 			{'thirsty:wooden_bowl', '', 'thirsty:wooden_bowl'},
@@ -94,14 +94,14 @@ if minetest.get_modpath("thirsty") then
 		}
 	})
 else
-	local res = minetest.get_craft_result({
+	local res = core.get_craft_result({
 		method = 'normal',
 		width = 3,
 		items = {'group:wood', '', 'group:wood','', 'group:wood', '','', '', ''},
 	})
 
 	if res and type(res.item) == 'string' then
-		minetest.register_craft({
+		core.register_craft({
 			output = 'wooden_bucket:bucket_wood_empty 1',
 			recipe = {
 				{'group:wood', 'group:leaves', 'group:wood'},
@@ -109,7 +109,7 @@ else
 			}
 		})
 	else
-		minetest.register_craft({
+		core.register_craft({
 			output = 'wooden_bucket:bucket_wood_empty 1',
 			recipe = {
 				{'group:wood', '', 'group:wood'},
@@ -119,7 +119,7 @@ else
 	end
 end
 
-minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
+core.register_craftitem("wooden_bucket:bucket_wood_empty", {
 	description = "Empty Wooden Bucket",
 	inventory_image = "wooden_bucket.png",
 	stack_max = 99,
@@ -131,7 +131,7 @@ minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
 		end
 
 		-- Check if pointing to a liquid source
-		local node = minetest.get_node(pointed_thing.under)
+		local node = core.get_node(pointed_thing.under)
 		if not node then
 			return
 		end
@@ -141,7 +141,7 @@ minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
 			return
 		end
 
-		if minetest.is_protected(pointed_thing.under, user:get_player_name()) then
+		if core.is_protected(pointed_thing.under, user:get_player_name()) then
 			return
 		end
 
@@ -165,7 +165,7 @@ minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
 			else
 				local pos = user:getpos()
 				pos.y = math.floor(pos.y + 0.5)
-				minetest.add_item(pos, giving_back)
+				core.add_item(pos, giving_back)
 			end
 
 			-- set to return empty buckets minus 1
@@ -173,8 +173,9 @@ minetest.register_craftitem("wooden_bucket:bucket_wood_empty", {
 
 		end
 
-		minetest.add_node(pointed_thing.under, {name="air"})
+		core.add_node(pointed_thing.under, {name="air"})
 
 		return ItemStack(giving_back)
 	end,
 })
+
